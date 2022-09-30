@@ -27,7 +27,7 @@ const ExperienceCard = ({ experience }: Props) => {
           once: true,
         }}
         className="w-32 h-32 rounded-full xl:w-[200px] xl:h-[200px] object-contain object-center"
-        src={urlFor(experience?.companyImage)?.url()}
+        src={experience?.companyImage ? urlFor(experience?.companyImage)?.url() : ""}
         alt=""
       />
       <div className="px-0 md:px-10">

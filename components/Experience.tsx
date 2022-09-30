@@ -7,7 +7,7 @@ type Props = {
   experiences: Experience[] | undefined;
 };
 
-const Experience = ({ experiences }: Props) => {
+const ExperienceComponent = ({ experiences }: Props) => {
   return (
     <motion.div
       initial={{
@@ -30,4 +30,4 @@ const Experience = ({ experiences }: Props) => {
     </motion.div>
   );
 };
-export default Experience;
+export default ExperienceComponent;

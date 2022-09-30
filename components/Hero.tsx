@@ -12,7 +12,7 @@ type Props = {
 
 const Hero = ({ pageInfo }: Props) => {
   const [text, _] = useTypewriter({
-    words: pageInfo?.pointsAboutYou ?? [],
+    words: pageInfo?.pointsAboutYou ?? ["Hi"],
     loop: true,
     delaySpeed: 2000,
   });
@@ -20,7 +20,7 @@ const Hero = ({ pageInfo }: Props) => {
     <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircle />
       <div className="relative h-36 w-36 mx-auto">
-        <Image src={urlFor(pageInfo?.heroImage)?.url()} alt="" layout="fill" className="rounded-full object-cover" />
+        <Image src={pageInfo?.heroImage ? urlFor(pageInfo?.heroImage)?.url() : ""} alt="" layout="fill" className="rounded-full object-cover" />
       </div>
       <div className="z-20">
         <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px]">{pageInfo?.role}</h2>

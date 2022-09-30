@@ -16,6 +16,7 @@ import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocial } from "../utils/fetchSocials";
 import { fetchProjects } from "../utils/fetchProjects";
 import { useEffect, useState } from "react";
+import { urlFor } from "../sanity";
 
 type Props = {
   pageInfo: PageInfo;
@@ -34,6 +35,7 @@ const Home = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
+      console.log(response[1]);
       setPageInfo(response[0]);
       setExperiences(response[1]);
       setSkills(response[2]);
@@ -71,7 +73,7 @@ const Home = () => {
         <footer className="sticky bottom-5 w-full cursor-pointer">
           <div className="flex items-center justify-center">
             <div className="relative w-10 h-10 l filter grayscale hover:grayscale-0 cursor-pointer">
-              <Image className="rounded-full" layout="fill" src="/img.jpg" alt="" />
+              <Image className="rounded-full" layout="fill" src={pageInfo?.heroImage ? urlFor(pageInfo?.heroImage)?.url() : ""} alt="" />
             </div>
           </div>
         </footer>
