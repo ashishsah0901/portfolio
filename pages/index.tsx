@@ -31,7 +31,17 @@ const Home = () => {
   const [skills, setSkills] = useState<Skill[]>();
   const [projects, setProjects] = useState<Project[]>();
   const [socials, setSocials] = useState<Social[]>();
-  useEffect(() => {});
+  useEffect(() => {
+    const getData = async () => {
+      const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
+      setPageInfo(response[0]);
+      setExperiences(response[1]);
+      setSkills(response[2]);
+      setProjects(response[3]);
+      setSocials(response[4]);
+    };
+    getData();
+  }, []);
   return (
     <div className="bg-[#242424] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scroll-smooth scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
       <Head>
