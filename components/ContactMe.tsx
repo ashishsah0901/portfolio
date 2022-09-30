@@ -11,7 +11,7 @@ type Inputs = {
 };
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo | undefined;
 };
 
 const ContactMe = ({ pageInfo }: Props) => {

@@ -7,12 +7,12 @@ import { PageInfo } from "../typings";
 import { urlFor } from "../sanity";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo | undefined;
 };
 
 const Hero = ({ pageInfo }: Props) => {
   const [text, _] = useTypewriter({
-    words: pageInfo?.pointsAboutYou,
+    words: pageInfo?.pointsAboutYou ?? [],
     loop: true,
     delaySpeed: 2000,
   });

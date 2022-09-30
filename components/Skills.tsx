@@ -4,7 +4,7 @@ import SkillComponent from "./Skill";
 import { Skill } from "../typings";
 
 type Props = {
-  skills: Skill[];
+  skills: Skill[] | undefined;
 };
 
 const Skills = ({ skills }: Props) => {

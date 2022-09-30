@@ -15,6 +15,7 @@ import { fetchPageInfo } from "../utils/fetchPageInfo";
 import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocial } from "../utils/fetchSocials";
 import { fetchProjects } from "../utils/fetchProjects";
+import { useEffect, useState } from "react";
 
 type Props = {
   pageInfo: PageInfo;
@@ -24,7 +25,13 @@ type Props = {
   socials: Social[];
 };
 
-const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
+const Home = () => {
+  const [pageInfo, setPageInfo] = useState<PageInfo>();
+  const [experiences, setExperiences] = useState<Experience[]>();
+  const [skills, setSkills] = useState<Skill[]>();
+  const [projects, setProjects] = useState<Project[]>();
+  const [socials, setSocials] = useState<Social[]>();
+  useEffect(() => {});
   return (
     <div className="bg-[#242424] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scroll-smooth scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
       <Head>
@@ -65,16 +72,16 @@ const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
-  return {
-    props: {
-      pageInfo: response[0],
-      experiences: response[1],
-      skills: response[2],
-      projects: response[3],
-      socials: response[4],
-    },
-    revalidate: 10,
-  };
-};
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
+//   return {
+//     props: {
+//       pageInfo: response[0],
+//       experiences: response[1],
+//       skills: response[2],
+//       projects: response[3],
+//       socials: response[4],
+//     },
+//     revalidate: 10,
+//   };
+// };

@@ -4,7 +4,7 @@ import ExperienceCard from "./ExperienceCard";
 import { Experience } from "../typings";
 
 type Props = {
-  experiences: Experience[];
+  experiences: Experience[] | undefined;
 };
 
 const Experience = ({ experiences }: Props) => {

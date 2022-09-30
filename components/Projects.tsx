@@ -5,7 +5,7 @@ import { urlFor } from "../sanity";
 import Image from "next/image";
 
 type Props = {
-  projects: Project[];
+  projects: Project[] | undefined;
 };
 
 const Projects = ({ projects }: Props) => {
