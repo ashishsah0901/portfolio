@@ -11,13 +11,13 @@ type Inputs = {
 };
 
 type Props = {
-  pageInfo: PageInfo | undefined;
+  pageInfo: PageInfo;
 };
 
 const ContactMe = ({ pageInfo }: Props) => {
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
-    window.location.href = `mailto:${pageInfo?.email}?subject=${formData.subject}&body=Hi ${pageInfo?.name}, %0d %0dThis is ${formData.name}, %0d${formData.message} %0d%0dThanks and Regards, %0d${formData.name} (${formData.email})`;
+    window.location.href = `mailto:${pageInfo.email}?subject=${formData.subject}&body=Hi ${pageInfo.name}, %0d %0dThis is ${formData.name}, %0d${formData.message} %0d%0dThanks and Regards, %0d${formData.name} (${formData.email})`;
   };
 
   return (
@@ -30,15 +30,15 @@ const ContactMe = ({ pageInfo }: Props) => {
         <div className="space-y-10">
           <div className="flex items-center space-x-5 justify-center">
             <PhoneIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p className="text-2xl">{pageInfo?.phoneNumber}</p>
+            <p className="text-2xl">{pageInfo.phoneNumber}</p>
           </div>
           <div className="flex items-center space-x-5 justify-center">
             <EnvelopeIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p className="text-2xl">{pageInfo?.email}</p>
+            <p className="text-2xl">{pageInfo.email}</p>
           </div>
           <div className="flex items-center space-x-5 justify-center">
             <MapPinIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p className="text-2xl">{pageInfo?.address}</p>
+            <p className="text-2xl">{pageInfo.address}</p>
           </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-2 w-fit mx-auto">

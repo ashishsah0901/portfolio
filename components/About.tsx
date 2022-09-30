@@ -4,7 +4,7 @@ import { PageInfo } from "../typings";
 import { urlFor } from "../sanity";
 
 type Props = {
-  pageInfo: PageInfo | undefined;
+  pageInfo: PageInfo;
 };
 
 const About = ({ pageInfo }: Props) => {
@@ -37,14 +37,14 @@ const About = ({ pageInfo }: Props) => {
         transition={{
           duration: 1.5,
         }}
-        src={pageInfo?.profilePic ? urlFor(pageInfo?.profilePic)?.url() : ""}
+        src={urlFor(pageInfo.profilePic).url()}
         className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover md:rounded-lg md:w-64 md:h-96 xl:w-[350px] xl:h-[400px]"
       />
       <div className="space-y-10 px-0 md:px-10">
         <h4 className="text-4xl font-semibold">
           Here is a <span className="underline decoration-[#F7AB0A]/50">little</span> about background about me.
         </h4>
-        <p className="text-base">{pageInfo?.backgroundInformation}</p>
+        <p className="text-base">{pageInfo.backgroundInformation}</p>
       </div>
     </motion.div>
   );

@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -9,13 +9,12 @@ import ContactMe from "../components/ContactMe";
 import Link from "next/link";
 import Image from "next/image";
 import { Experience, PageInfo, Project, Skill, Social } from "../typings";
-import ExperienceComponent from "../components/Experience";
+import ExperienceComponent from "../components/ExperienceComponent";
 import { fetchExperiences } from "../utils/fetchExperiences";
 import { fetchPageInfo } from "../utils/fetchPageInfo";
 import { fetchSkills } from "../utils/fetchSkills";
 import { fetchSocial } from "../utils/fetchSocials";
 import { fetchProjects } from "../utils/fetchProjects";
-import { useEffect, useState } from "react";
 import { urlFor } from "../sanity";
 
 type Props = {
@@ -26,24 +25,7 @@ type Props = {
   socials: Social[];
 };
 
-const Home = () => {
-  const [pageInfo, setPageInfo] = useState<PageInfo>();
-  const [experiences, setExperiences] = useState<Experience[]>();
-  const [skills, setSkills] = useState<Skill[]>();
-  const [projects, setProjects] = useState<Project[]>();
-  const [socials, setSocials] = useState<Social[]>();
-  useEffect(() => {
-    const getData = async () => {
-      const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
-      console.log(response[1]);
-      setPageInfo(response[0]);
-      setExperiences(response[1]);
-      setSkills(response[2]);
-      setProjects(response[3]);
-      setSocials(response[4]);
-    };
-    getData();
-  }, []);
+const Home = ({ pageInfo, experiences, skills, projects, socials }: Props) => {
   return (
     <div className="bg-[#242424] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scroll-smooth scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
       <Head>
@@ -73,7 +55,7 @@ const Home = () => {
         <footer className="sticky bottom-5 w-full cursor-pointer">
           <div className="flex items-center justify-center">
             <div className="relative w-10 h-10 l filter grayscale hover:grayscale-0 cursor-pointer">
-              <Image className="rounded-full" layout="fill" src={pageInfo?.heroImage ? urlFor(pageInfo?.heroImage)?.url() : ""} alt="" />
+              <Image className="rounded-full" layout="fill" src={urlFor(pageInfo.heroImage).url()} alt="" />
             </div>
           </div>
         </footer>
@@ -84,16 +66,16 @@ const Home = () => {
 
 export default Home;
 
-// export const getStaticProps: GetStaticProps<Props> = async () => {
-//   const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
-//   return {
-//     props: {
-//       pageInfo: response[0],
-//       experiences: response[1],
-//       skills: response[2],
-//       projects: response[3],
-//       socials: response[4],
-//     },
-//     revalidate: 10,
-//   };
-// };
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const response = await Promise.all([fetchPageInfo(), fetchExperiences(), fetchSkills(), fetchProjects(), fetchSocial()]);
+  return {
+    props: {
+      pageInfo: response[0],
+      experiences: response[1],
+      skills: response[2],
+      projects: response[3],
+      socials: response[4],
+    },
+    revalidate: 10,
+  };
+};

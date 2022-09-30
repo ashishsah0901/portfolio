@@ -5,7 +5,7 @@ import { urlFor } from "../sanity";
 import Image from "next/image";
 
 type Props = {
-  projects: Project[] | undefined;
+  projects: Project[];
 };
 
 const Projects = ({ projects }: Props) => {
@@ -24,8 +24,8 @@ const Projects = ({ projects }: Props) => {
     >
       <h3 className="absolute top-16 md:top-24 uppercase tracking-[20px] text-gray-500 text-2xl">Projects</h3>
       <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20  scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
-        {projects?.map((project, i) => (
-          <div key={project?._id} className="w-full flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
+        {projects.map((project, i) => (
+          <div key={project._id} className="w-full flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20 md:p-44 h-screen">
             <motion.img
               initial={{
                 x: -300,
@@ -41,22 +41,22 @@ const Projects = ({ projects }: Props) => {
               viewport={{
                 once: true,
               }}
-              src={project?.image ? urlFor(project?.image)?.url() : ""}
+              src={project.image ? urlFor(project.image)?.url() : ""}
               alt=""
             />
             <div className="space-y-10 px-0 md:px-10 max-w-6xl">
               <h4 className="text-4xl font-semibold text-center">
                 <span className="underline decoration-[#F7AB0A]/50">
-                  Case Study {i + 1} of {projects?.length}
+                  Case Study {i + 1} of {projects.length}
                 </span>{" "}
-                : {project?.title}
+                : {project.title}
               </h4>
-              {project?.technologies?.map((technology) => (
-                <div key={technology?._id} className="relative h-10 w-10 rounded-full">
-                  <Image layout="fill" className="rounded-full object-cover" src={urlFor(technology?.image)?.url()} alt="" />
+              {project.technologies?.map((technology) => (
+                <div key={technology._id} className="relative h-10 w-10 rounded-full">
+                  <Image layout="fill" className="rounded-full object-cover" src={urlFor(technology.image)?.url()} alt="" />
                 </div>
               ))}
-              <p className="text-lg text-center md:text-left ">{project?.summary}</p>
+              <p className="text-lg text-center md:text-left ">{project.summary}</p>
             </div>
           </div>
         ))}

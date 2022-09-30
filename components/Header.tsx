@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Social } from "../typings";
 
 type Props = {
-  socials: Social[] | undefined;
+  socials: Social[];
 };
 
 const Header = ({ socials }: Props) => {
@@ -27,8 +27,8 @@ const Header = ({ socials }: Props) => {
         }}
         className="flex flex-row items-center"
       >
-        {socials?.map((social) => (
-          <SocialIcon key={social?._id} url={social?.url} fgColor="gray" bgColor="transparent" />
+        {socials.map((social) => (
+          <SocialIcon key={social._id} url={social.url} fgColor="gray" bgColor="transparent" />
         ))}
       </motion.div>
       <Link href="#contactMe">
